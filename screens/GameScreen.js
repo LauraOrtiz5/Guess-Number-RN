@@ -24,7 +24,7 @@ function GameScreen ({userNumber}) {
         <NumberContainer>{currentGuess}</NumberContainer>
         <View>
             <Text>Higher or lower?</Text>
-            {/*+ -*/}
+            {/*+ & -*/}
         </View>
         {/*<View>LOG RUNS</View>*/}
     </View>
