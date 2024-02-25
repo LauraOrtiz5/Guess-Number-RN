@@ -63,12 +63,12 @@ function GameScreen({ userNumber, onGameOver }) {
                 <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
                         <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
-                            <Ionicons name="remove-circle" size={24} color={Colors.accent500} />
+                            <Ionicons name="add-circle" size={24} color={Colors.accent500} />
                         </PrimaryButton>
                     </View>
                     <View style={styles.buttonContainer}>
                         <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
-                            <Ionicons name="add-circle" size={24} color={Colors.accent500} />
+                            <Ionicons name="remove-circle" size={24} color={Colors.accent500} />
                         </PrimaryButton>
                     </View>
                 </View>
