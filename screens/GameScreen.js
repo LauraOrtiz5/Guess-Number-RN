@@ -6,6 +6,7 @@ import PrimaryButton from '../components/ui/PrimaryButton';
 import Card from '../components/ui/Card';
 import InstructionText from '../components/ui/InstructionText';
 import NumberContainer from '../components/game/NumberContainer';
+import GuessLogItem from '../components/game/GuessLogItem';
 
 import Colors from '../constants/colors';
 
@@ -31,7 +32,7 @@ function GameScreen({ userNumber, onGameOver }) {
 
     useEffect(() => {
         if (currentGuess === userNumber) {
-            onGameOver();
+            onGameOver(guessRound.length);
         }
     }, [currentGuess, userNumber, onGameOver]);
 
@@ -59,6 +60,8 @@ function GameScreen({ userNumber, onGameOver }) {
         setGuessRound(prevGuessRound => [newRndNumber, ...prevGuessRound]);
     }
 
+    const guessRoundsListLength = guessRound.length;
+
     return (
         <View style={styles.screen}>
             <Title>Opponent's Guess</Title>
@@ -80,10 +83,15 @@ function GameScreen({ userNumber, onGameOver }) {
                     </View>
                 </View>
             </Card>
-            <View>
+            <View style={styles.listConatiner} >
                 <FlatList
                     data={guessRound}
-                    renderItem={(itemData) => <Text>{itemData.item}</Text>}
+                    renderItem={(itemData) => (
+                        <GuessLogItem
+                            roundNumber={guessRoundsListLength - itemData.index}
+                            guess={itemData.item}
+                        />
+                    )}
                     keyExtractor={(item) => item}
                 />
             </View>
@@ -106,5 +114,9 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1
+    },
+    listConatiner: {
+        flex: 1,
+        padding: 16
     }
 });
