@@ -165,18 +165,18 @@ const styles = StyleSheet.create({
     },
     listConatiner: {
         flex: 1,
-        padding: 16
+        paddingTop: 36
     },
     buttonContainerWide: {
         flexDirection: 'row',
-        alignItems: 'center',
-
+        alignItems: 'center'
     },
     buttonsContainerPack: {
         flexDirection: 'column'
     },
     generalWide: {
         flexDirection: 'row',
-        flex: 1
+        flex: 1,
+        alignItems: 'center'
     }
 });
