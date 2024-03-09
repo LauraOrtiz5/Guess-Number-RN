@@ -151,7 +151,8 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         padding: 24,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 15
     },
     instructionText: {
         marginBottom: 12
