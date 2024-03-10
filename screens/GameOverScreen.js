@@ -1,26 +1,55 @@
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, ScrollView, useWindowDimensions } from "react-native";
 
 import Title from "../components/ui/Title";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Colors from "../constants/colors"
 
-function GameOverScreen({roundsNumber, userNumber, onStartNewGame}) {
+function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
+    const { width, height } = useWindowDimensions();
+
+    let imageSize = 300;
+    let textSize = 24;
+
+    if (width < 380) {
+        imageSize = 260;
+    }
+
+    if (height < 400) {
+        imageSize = 130;
+    }
+
+    if (width > height) {
+        textSize = 18;
+    }
+
+    const imageStyle = {
+        width: imageSize,
+        height: imageSize,
+        borderRadius: imageSize / 2
+    }
+
+    const textStyle = {
+        fontSize: textSize,
+    }
+
     return (
-        <View style={styles.rootContainer}>
-            <Title>GAME OVER</Title>
-            <View style={styles.imageContainer}>
-                <Image style={styles.image} source={require('../assets/images/success.png')} />
+        <ScrollView>
+            <View style={styles.rootContainer}>
+                <Title>GAME OVER</Title>
+                <View style={[styles.imageContainer, imageStyle]}>
+                    <Image style={styles.image} source={require('../assets/images/success.png')} />
+                </View>
+                <View>
+                    <Text style={[styles.summaryText, textStyle]}>
+                        Your phone needed
+                        <Text style={styles.highlight}> {roundsNumber} </Text>
+                        rounds to guess the number
+                        <Text style={styles.highlight}> {userNumber} </Text>
+                    </Text>
+                </View>
+                <PrimaryButton onPress={onStartNewGame}>Start new game</PrimaryButton>
             </View>
-            <View>
-                <Text style={styles.summaryText}>
-                    Your phone needed
-                    <Text style={styles.highlight}> {roundsNumber} </Text>
-                    rounds to guess the number
-                    <Text style={styles.highlight}> {userNumber} </Text>
-                </Text>
-            </View>
-            <PrimaryButton onPress={onStartNewGame}>Start new game</PrimaryButton>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -34,9 +63,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     imageContainer: {
-        width: 300,
-        height: 300,
-        borderRadius: 150,
         borderWidth: 3,
         borderColor: Colors.primary800,
         overflow: 'hidden',
@@ -48,7 +74,6 @@ const styles = StyleSheet.create({
     },
     summaryText: {
         fontFamily: 'open-sans',
-        fontSize: 24,
         textAlign: 'center',
         marginBottom: 24
     },
